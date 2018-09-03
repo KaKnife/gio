@@ -328,9 +328,6 @@ status = "generate"
         [object.function.return]
         nullable = false
     [[object.function]]
-    name = "hash"
-    ignore = true
-    [[object.function]]
     name = "enumerate_children_async"
     # FileEnumerator
     ignore = true

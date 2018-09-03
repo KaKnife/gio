@@ -172,6 +172,8 @@ pub trait FileExt: Sized {
 
     fn has_uri_scheme(&self, uri_scheme: &str) -> bool;
 
+    fn hash(&self) -> u32;
+
     fn is_native(&self) -> bool;
 
     #[cfg(any(feature = "v2_56", feature = "dox"))]
@@ -806,6 +808,12 @@ impl<O: IsA<File> + IsA<glib::object::Object> + Clone + 'static> FileExt for O {
     fn has_uri_scheme(&self, uri_scheme: &str) -> bool {
         unsafe {
             from_glib(ffi::g_file_has_uri_scheme(self.to_glib_none().0, uri_scheme.to_glib_none().0))
+        }
+    }
+
+    fn hash(&self) -> u32 {
+        unsafe {
+            ffi::g_file_hash(ToGlibPtr::<*mut ffi::GFile>::to_glib_none(self).0 as glib_ffi::gconstpointer)
         }
     }
 
